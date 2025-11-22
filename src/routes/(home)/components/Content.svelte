@@ -96,7 +96,7 @@
                             Save the Date
                         </div>
                         <h2
-                            class="text-center text-base leading-tight font-bold sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-2xl bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                            class="text-center text-base leading-tight font-bold sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-2xl bg-primary bg-clip-text text-transparent">
                             Countdown With Us!
                         </h2>
                         <div class="mt-8 flex gap-4 text-center md:gap-6 justify-center">

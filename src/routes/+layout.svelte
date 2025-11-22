@@ -7,10 +7,8 @@
 </script>
 
 <svelte:head>
-    <title>Scalo - Startup Template</title>
-    <meta
-        name="description"
-        content="Scalo is a modern and flexible startup template designed to help you launch and scale your projects effortlessly." />
+    <title>Steph & Ian</title>
+    <meta name="description" content="Let's do this thing" />
 </svelte:head>
 <ConfigProvider>
     {@render children()}

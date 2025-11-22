@@ -20,11 +20,14 @@
         <div class="badge bg-base-100 badge-outline border-base-300 badge-sm font-mono">{label}</div>
     {/if}
     {#if title}
-        <p class="mt-1 text-2xl font-semibold sm:text-3xl">{title}</p>
+        <p
+            class="text-center text-3xl leading-tight font-bold sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4">
+            {title}
+        </p>
     {/if}
     <div class="mt-2 flex items-center justify-center">
         {#if description}
-            <p class="text-base-content/80 max-w-lg max-sm:text-sm">{description}</p>
+            <p class="text-base-content/70 text-lg italic max-w-2xl mx-auto">{description}</p>
         {/if}
     </div>
 </div>
