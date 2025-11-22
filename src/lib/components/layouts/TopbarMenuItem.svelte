@@ -14,6 +14,7 @@
 </script>
 
 <script lang="ts">
+    import { page } from "$app/stores";
     import MenuItemBadges from "$lib/components/layouts/MenuItemBadges.svelte";
     import TopbarMenuItem from "./TopbarMenuItem.svelte";
 
@@ -29,6 +30,7 @@
         scrollPosition = 0,
     }: IMenuItem & { scrollPosition?: number } = $props();
     const isScrolled = $derived(scrollPosition >= 30);
+    const isActive = $derived(href ? $page.url.pathname === href : false);
 </script>
 
 {#if level > 0 && items}
@@ -56,8 +58,7 @@
             tabindex="0"
             role="button"
             class="rounded-box flex cursor-pointer items-center gap-1.5 px-3 py-1.5 text-sm transition-colors duration-300 group-hover:text-primary-content hover:bg-base-200"
-            class:text-primary-content={scrollPosition >= 30}
-            data-at-top={scrollPosition < 30}>
+            class:bg-accent={isActive}>
             {title}
             <span class="iconify lucide--chevron-down transition-all duration-300 group-hover:rotate-180"></span>
         </button>
@@ -73,9 +74,8 @@
 {:else}
     <a
         href={href ?? ""}
-        class="rounded-box flex items-center gap-2.5 px-3 py-1.5 text-sm transition-colors duration-300 group-hover:text-primary-content hover:bg-base-200"
-        class:text-primary-content={scrollPosition >= 30}
-        data-at-top={scrollPosition < 30}
+        class="rounded-box flex items-center gap-2.5 px-3 py-1.5 text-sm transition-colors duration-300 text-info-content hover:bg-base-200"
+        class:bg-accent={isActive}
         {...anchorProps}>
         {#if icon}
             <span class="iconify {icon} size-4"></span>

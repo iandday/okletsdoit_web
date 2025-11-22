@@ -55,7 +55,7 @@
 </script>
 
 <div
-    class="group data-[at-top=false]:bg-base-300 hover:bg-base-300 sticky top-0 z-50 transition-all duration-500 data-[at-top=false]:shadow data-[at-top=false]:backdrop-blur-lg"
+    class="group bg-base-300 sticky top-0 z-50 transition-all duration-500 data-[at-top=false]:shadow data-[at-top=false]:backdrop-blur-lg"
     data-at-top={scrollPosition < 30}>
     <div class="container flex h-16 items-center justify-between gap-6">
         <div class="flex items-center gap-3"></div>
