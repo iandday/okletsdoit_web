@@ -8,4 +8,3 @@
         <Content />
     </PageShell>
 </div>
-http://localhost:5173/

@@ -61,7 +61,7 @@
     });
 </script>
 
-<div class="z-10 container mt-8 md:mt-12 lg:mt-16 2xl:mt-24">
+<div>
     <div class="flex md:flex-row flex-col items-center gap-8 px-10 py-4">
         <img
             src="/images/core/cover-1-small.webp"

@@ -57,7 +57,7 @@
 <div
     class="group bg-base-300 sticky top-0 z-50 transition-all duration-500 data-[at-top=false]:shadow data-[at-top=false]:backdrop-blur-lg"
     data-at-top={scrollPosition < 30}>
-    <div class="container flex h-16 items-center justify-between gap-6">
+    <div class="container flex h-16 items-center justify-between gap-6 pl-4 pr-0 md:pl-6 md:pr-0 lg:pl-8">
         <div class="flex items-center gap-3"></div>
         <div class="hidden items-center gap-1 md:flex">
             {#each menu as item, index (index)}
@@ -69,7 +69,7 @@
             <div class="dropdown dropdown-hover md:dropdown-center dropdown-end">
                 <div class="avatar cursor-pointer">
                     <div class="bg-base-200 mask mask-squircle w-8">
-                        <img src="/images/avatars/1.png" alt="Avatar" />
+                        <span class="iconify lucide--user-circle size-8"></span>
                     </div>
                 </div>
                 <div tabIndex={0} class="dropdown-content bg-base-300 rounded-box z-1 w-44 p-2 text-sm shadow-sm">
