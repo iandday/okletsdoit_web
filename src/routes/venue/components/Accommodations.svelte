@@ -1,33 +1,4 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import { Swiper } from "swiper";
-    import "swiper/css";
-    import { Autoplay, Navigation, Pagination } from "swiper/modules";
-
-    const swiperOptions = {
-        slidesPerView: 1,
-        cardsEffect: {
-            rotate: false,
-            perSlideOffset: 10,
-            slideShadows: false,
-        },
-        loop: true,
-        speed: 1500,
-        autoplay: {
-            delay: 5000,
-        },
-        spaceBetween: 20,
-        navigation: {
-            prevEl: ".attractions-button-prev",
-            nextEl: ".attractions-button-next",
-        },
-        modules: [Navigation, Pagination, Autoplay],
-    };
-
-    $effect(() => {
-        new Swiper(".swiper", swiperOptions);
-    });
-
     type iAccommodation = {
         name: string;
         description: string;

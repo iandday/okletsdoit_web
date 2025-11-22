@@ -14,7 +14,7 @@
 
 <div>
     <Topbar />
-    <div class="pt-2 pb-8 lg:pb-16 xl:pb-24 2xl:pb-28">
+    <div class="pt-2 px-6 pb-8 lg:pb-16 xl:pb-24 2xl:pb-28">
         <div class="relative">
             <PageTitle {label} {title} {description} {centered} {image} />
             <slot></slot>

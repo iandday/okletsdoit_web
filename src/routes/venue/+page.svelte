@@ -16,7 +16,7 @@
         <img
             src="/images/venue/timberframeExterior.webp"
             alt="Timberframe Lodge"
-            class="mb-8 w-auto max-w-full px-6 mx-auto" />
+            class="mb-8 w-auto max-w-full mx-auto" />
 
         <Gallery />
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
