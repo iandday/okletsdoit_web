@@ -1,9 +1,11 @@
 <script lang="ts">
-    import Topbar from "$lib/components/layouts/Topbar.svelte";
-    import Hero from "./components/Hero.svelte";
+    import PageShell from "$lib/components/layouts/PageShell.svelte";
+    import Content from "./components/Content.svelte";
 </script>
 
 <div>
-    <Topbar />
-    <Hero />
+    <PageShell image="/images/titles/logo.png">
+        <Content />
+    </PageShell>
 </div>
+http://localhost:5173/
