@@ -26,7 +26,15 @@
     $effect(() => {
         new Swiper(".swiper", swiperOptions);
     });
-    const attractions = [
+
+    type iAttactions = {
+        img: string;
+        alt: string;
+        url: string;
+        name: string;
+        description: string;
+    };
+    const attractions: iAttactions[] = [
         {
             img: "https://innatcedarfalls.com/wp-content/uploads/2024/05/GettyImages-820732146copy.jpg",
             alt: "Venue Photo 1",
@@ -58,53 +66,55 @@
     ];
 </script>
 
-<h2
-    class="text-center text-2xl leading-tight font-bold sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-    Explore Local Attractions
-</h2>
-<div
-    class="mt-8 flex scroll-mt-36 justify-center overflow-visible transition-all delay-1500 duration-1000 md:mt-12 xl:mt-16 starting:opacity-0">
-    <div class="relative max-w-[95%] md:max-w-xl lg:max-w-3xl xl:max-w-5xl">
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                {#each attractions as attraction}
-                    <div class="swiper-slide">
-                        <div class="group relative overflow-hidden rounded-xl p-1.5">
-                            <img
-                                src={attraction.img}
-                                class="h-96 w-full rounded-lg object-cover object-center"
-                                alt={attraction.alt}
-                                loading="lazy" />
+<div class="mx-auto my-16 max-w-7xl px-4 sm:px-6 lg:px-8">
+    <h2
+        class="text-center text-2xl leading-tight font-bold sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+        Wanna See Some Attractions?
+    </h2>
+    <div
+        class="mt-8 flex scroll-mt-36 justify-center overflow-visible transition-all delay-1500 duration-1000 md:mt-12 xl:mt-16 starting:opacity-0">
+        <div class="relative max-w-[95%] md:max-w-xl lg:max-w-3xl xl:max-w-5xl">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    {#each attractions as attraction}
+                        <div class="swiper-slide">
+                            <div class="group relative overflow-hidden rounded-xl p-1.5">
+                                <img
+                                    src={attraction.img}
+                                    class="h-96 w-full rounded-lg object-cover object-center"
+                                    alt={attraction.alt}
+                                    loading="lazy" />
 
-                            <div
-                                class="rounded-box mb-8 gap-2.5 bg-secondary text-secondary-content px-4 py-2 font-medium shadow-lg transition-all duration-300 group-hover:translate-y-0 md:absolute md:bottom-6 md:left-6 md:max-w-xs starting:-translate-y-10">
-                                {attraction.name}
-                                <div class="text-sm font-normal text-secondary-content">
-                                    {attraction.description}
+                                <div
+                                    class="rounded-box mb-8 gap-2.5 bg-secondary text-secondary-content px-4 py-2 font-medium shadow-lg transition-all duration-300 group-hover:translate-y-0 md:absolute md:bottom-6 md:left-6 md:max-w-xs starting:-translate-y-10">
+                                    {attraction.name}
+                                    <div class="text-sm font-normal text-secondary-content">
+                                        {attraction.description}
+                                    </div>
+
+                                    <a
+                                        href={attraction.url}
+                                        target="_blank"
+                                        class="badge badge-primary mt-3 px-3 py-2 text-sm hover:bg-success hover:text-white transition">
+                                        Learn More
+                                    </a>
                                 </div>
-
-                                <a
-                                    href={attraction.url}
-                                    target="_blank"
-                                    class="badge badge-primary mt-3 px-3 py-2 text-sm hover:bg-success hover:text-white transition">
-                                    Learn More
-                                </a>
                             </div>
                         </div>
-                    </div>
-                {/each}
+                    {/each}
+                </div>
             </div>
-        </div>
-        <div
-            class="absolute z-1 flex justify-between max-md:start-1/2 max-md:-bottom-12 max-md:-translate-x-1/2 max-md:gap-3 md:-inset-x-24 md:top-1/2 md:-translate-y-1/2">
-            <button
-                class="testimonials-button-prev border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-white shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10 dark:border-white/10 dark:bg-white/10 dark:hover:bg-white/20">
-                <span class="iconify lucide--chevron-left size-5"></span>
-            </button>
-            <button
-                class="testimonials-button-next border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-white shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10 dark:border-white/10 dark:bg-white/10 dark:hover:bg-white/20">
-                <span class="iconify lucide--chevron-right size-5"></span>
-            </button>
+            <div
+                class="absolute z-1 flex justify-between max-md:start-1/2 max-md:-bottom-12 max-md:-translate-x-1/2 max-md:gap-3 md:-inset-x-24 md:top-1/2 md:-translate-y-1/2">
+                <button
+                    class="border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-content hover:bg-base-200 hover:text-primary-content shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10">
+                    <span class="iconify lucide--chevron-left size-5"></span>
+                </button>
+                <button
+                    class="border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-content hover:bg-base-200 hover:text-primary-content shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10">
+                    <span class="iconify lucide--chevron-right size-5"></span>
+                </button>
+            </div>
         </div>
     </div>
 </div>
