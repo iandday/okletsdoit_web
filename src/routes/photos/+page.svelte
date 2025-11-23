@@ -8,12 +8,12 @@
             <div class="container mx-auto px-4 md:px-6 lg:px-8 max-w-4xl">
                 <!-- Coming Soon Announcement -->
                 <div class="flex justify-center items-center min-h-[400px]">
-                    <div class="card bg-base-200 shadow-2xl border border-primary/20 w-full max-w-2xl">
+                    <div class="card bg-base-200 shadow-2xl border border-primary/20 w-full max-w-2xl pb-2">
                         <div class="card-body items-center text-center">
                             <div class="mb-6">
                                 <span class="iconify lucide--camera size-20 text-accent animate-pulse"></span>
                             </div>
-                            <div class="badge badge-primary badge-lg mb-4 gap-2 px-4 py-3">
+                            <div class="badge badge-primary badge-lg mb-2 gap-2 px-4 py-3">
                                 <span class="iconify lucide--clock size-4"></span>
                                 Coming Soon
                             </div>
@@ -22,7 +22,7 @@
                                 We're building a special place where you can upload and share your favorite photos from
                                 our big day! This feature will be available starting on our wedding day.
                             </p>
-                            <div class="divider"></div>
+
                             <div class="text-left w-full max-w-md">
                                 <h3 class="font-bold text-primary-content text-lg mb-3 flex items-center gap-2">
                                     <span class="iconify lucide--sparkles size-5 text-primary-content"></span>
@@ -50,19 +50,6 @@
                                         <span class="text-primary-content">Create lasting memories together</span>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="mt-8">
-                                <div class="alert bg-neutral border-info/30 shadow-md">
-                                    <div class="flex items-start gap-3">
-                                        <span class="iconify lucide--info size-5 text-warning flex-shrink-0"></span>
-                                        <div class="text-sm text-left">
-                                            <p class="text-base-content/70">
-                                                Save this page! The upload portal will go live on
-                                                <strong class="text-warning">November 7, 2026</strong>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -76,32 +76,32 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
         {#each Accommodations as accommodation, index}
             <div
-                class="card bg-base-100 shadow-xl border border-base-300 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                class="card bg-base-200 shadow-xl border border-base-300 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
                 <div class="card-body">
                     <!-- Icon based on type -->
                     <div class="flex items-start justify-between mb-2">
                         {#if accommodation.type === "hotel"}
-                            <div class="badge badge-primary badge-sm rounded-full p-4 m-3">
-                                <span class="iconify lucide--hotel size-6 text-primary-content"></span>Hotel
+                            <div class="badge badge-accent badge-sm rounded-full p-4 m-3">
+                                <span class="iconify lucide--hotel size-6 text-accent-content"></span>Hotel
                             </div>
                         {:else if accommodation.type === "home"}
-                            <div class="badge badge-primary badge-sm rounded-full p-4 m-3">
-                                <span class="iconify lucide--home size-6 text-primary-content"></span>Home
+                            <div class="badge badge-accent badge-sm rounded-full p-4 m-3">
+                                <span class="iconify lucide--home size-6 text-accent-content"></span>Rental
                             </div>
                         {:else}
-                            <div class="badge badge-primary badge-sm rounded-full p-4 m-3">
-                                <span class="iconify lucide--tent size-6 text-primary-content"></span>Camping
+                            <div class="badge badge-accent badge-sm rounded-full p-4 m-3">
+                                <span class="iconify lucide--tent size-6 text-accent-content"></span>Camping
                             </div>
                         {/if}
                     </div>
 
-                    <h3 class="card-title text-accent text-lg mb-2">{accommodation.name}</h3>
-                    <p class="text-accent text-sm mb-4 line-clamp-3">{accommodation.description}</p>
+                    <h3 class="card-title text-primary-content text-lg mb-2">{accommodation.name}</h3>
+                    <p class="text-primary-content text-sm mb-4 line-clamp-3">{accommodation.description}</p>
 
                     <!-- Contact Info -->
                     <div class="space-y-2 mb-4">
                         {#if accommodation.phone}
-                            <div class="flex items-center gap-2 text-sm text-accent">
+                            <div class="flex items-center gap-2 text-sm text-primary-content">
                                 <span class="iconify lucide--phone size-4"></span>
                                 <a href="tel:{accommodation.phone}" class="hover:text-primary transition-colors">
                                     {accommodation.phone}
@@ -109,7 +109,7 @@
                             </div>
                         {/if}
                         {#if accommodation.address}
-                            <div class="flex items-start gap-2 text-sm text-accent">
+                            <div class="flex items-start gap-2 text-sm text-primary-content">
                                 <span class="iconify lucide--map-pin size-4 mt-0.5 flex-shrink-0"></span>
                                 <span class="line-clamp-2">{accommodation.address}</span>
                             </div>

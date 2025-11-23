@@ -169,7 +169,7 @@
                 <div class="container mx-auto px-4 md:px-6 lg:px-8 max-w-4xl">
                     <!-- Coming Soon Announcement -->
                     <div class="flex justify-center items-center min-h-[400px]">
-                        <div class="card bg-base-200 shadow-2xl border border-primary/20 w-full max-w-2xl">
+                        <div class="card bg-base-200 shadow-2xl border border-primary/20 w-full max-w-2xl pb-2">
                             <div class="card-body items-center text-center">
                                 <div class="mb-6">
                                     <span class="iconify lucide--help-circle size-20 text-accent animate-pulse"></span>
@@ -183,7 +183,7 @@
                                     We're preparing a comprehensive FAQ section to answer all your questions about our
                                     special day! Check back soon for helpful information.
                                 </p>
-                                <div class="divider"></div>
+
                                 <div class="text-left w-full max-w-md">
                                     <h3 class="font-bold text-primary-content text-lg mb-3 flex items-center gap-2">
                                         <span class="iconify lucide--sparkles size-5 text-primary-content"></span>
@@ -214,19 +214,6 @@
                                             <span class="text-primary-content">Food, drinks, and dietary options</span>
                                         </li>
                                     </ul>
-                                </div>
-                                <div class="mt-8">
-                                    <div class="alert bg-neutral border-info/30 shadow-md">
-                                        <div class="flex items-start gap-3">
-                                            <span class="iconify lucide--info size-5 text-warning flex-shrink-0"></span>
-                                            <div class="text-sm text-left">
-                                                <p class="text-base-content/70">
-                                                    In the meantime, feel free to reach out to us directly with any
-                                                    questions!
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -263,11 +250,12 @@
                             <div class="space-y-3">
                                 {#each entry.faqs as faq, index}
                                     <div
-                                        class="collapse collapse-plus bg-neutral text-neutral-content border border-base-300 shadow-md hover:shadow-lg transition-shadow">
+                                        class="collapse collapse-plus bg-secondary text-secondary-content border border-base-300 shadow-md hover:shadow-lg transition-shadow">
                                         <input type="radio" name="faq-accordion-{index}" />
                                         <div class="collapse-title text-lg font-medium flex items-center gap-3">
                                             <div class="bg-primary/10 rounded-full p-2 flex-shrink-0">
-                                                <span class="iconify {faq.icon} size-5 text-primary"></span>
+                                                <span class="iconify {faq.icon} size-7 font-strong text-primary-content"
+                                                ></span>
                                             </div>
                                             <span>{faq.question}</span>
                                         </div>
@@ -295,7 +283,7 @@
 
                             <!-- Tips Section -->
                             {#if entry.tips && entry.tips.length > 0}
-                                <div class="mt-4 alert bg-secondary text-secondary-content border-accent/30 shadow-md">
+                                <div class="mt-4 alert bg-base-100 text-neutral-content border-accent/30 shadow-md">
                                     <div class="flex items-start gap-3 w-full">
                                         <span class="iconify lucide--lightbulb size-6 text-accent flex-shrink-0"></span>
                                         <div class="flex-1">
