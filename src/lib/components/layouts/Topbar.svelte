@@ -32,6 +32,53 @@
             href: "/photos",
         },
     ];
+
+    const legacyLinks: IMenuItem[] = [
+        {
+            title: "Dashboard",
+            href: "/planning/",
+        },
+        {
+            title: "Inspiration",
+            href: "/inspiration/",
+        },
+        {
+            title: "Ideas",
+            href: "/idea/",
+        },
+        {
+            title: "Contacts",
+            href: "/contacts/",
+        },
+        {
+            title: "Lists",
+            href: "/lists/",
+        },
+        {
+            title: "Deadlines",
+            href: "/deadline/",
+        },
+        {
+            title: "Budget",
+            href: "/expenses/",
+        },
+        {
+            title: "Guest List",
+            href: "/guestlist/",
+        },
+        {
+            title: "Timeline",
+            href: "/timeline/",
+        },
+        {
+            title: "FAQ",
+            href: "/question/",
+        },
+        {
+            title: "Settings",
+            href: "/settings/",
+        },
+    ];
     let scrollPosition = $state(0);
     let scrollRef: HTMLDivElement;
 
@@ -81,6 +128,15 @@
                 <div tabIndex={0} class="dropdown-content bg-base-300 rounded-box z-1 w-44 p-2 text-sm shadow-sm">
                     <ul class="menu w-full p-0">
                         {#if $auth.isAuthenticated}
+                            {#each legacyLinks as item, index (index)}
+                                <li>
+                                    <a
+                                        class="text-primary-content flex items-center gap-2 px-3 py-1.5"
+                                        href={item.href}>
+                                        <span>{item.title}</span>
+                                    </a>
+                                </li>
+                            {/each}
                             <li>
                                 <a
                                     class="text-primary-content flex items-center gap-2 px-3 py-1.5"
