@@ -1,9 +1,15 @@
 <script lang="ts">
     import BackToTop from "$lib/components/BackToTop.svelte";
     import ConfigProvider from "$lib/contexts/ConfigProvider.svelte";
+    import { auth } from "$lib/stores/auth";
     import "$lib/styles/app.css";
+    import { onMount } from "svelte";
 
     let { children } = $props();
+
+    onMount(() => {
+        auth.init();
+    });
 </script>
 
 <svelte:head>

@@ -18,7 +18,7 @@
     </li>
 {:else if !(level > 0 && isSection)}
     <li>
-        <a {...anchorProps} {href} class="hover:bg-base-200 rounded-box block px-3 py-1.5 text-sm">
+        <a {...anchorProps} {href} class="text-primary-content hover:bg-base-200 rounded-box block px-3 py-1.5 text-sm">
             {title}
         </a>
     </li>
