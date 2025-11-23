@@ -1,8 +1,13 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import { page } from "$app/stores";
     import { auth } from "$lib/stores/auth";
     import { onMount } from "svelte";
+
+    interface Props {
+        url: URL;
+    }
+
+    let { url }: Props = $props();
 
     let email = $state("");
     let password = $state("");
@@ -25,7 +30,7 @@
 
         if (result.success) {
             // Redirect to original page or home
-            const redirectTo = $page.url.searchParams.get("redirect") || "/";
+            const redirectTo = url.searchParams.get("redirect") || "/";
             goto(redirectTo);
         } else {
             error = result.error || "Login failed. Please try again.";
@@ -37,7 +42,7 @@
     async function handleSocialLogin(providerId: string) {
         loading = true;
         error = "";
-        const redirectTo = $page.url.searchParams.get("redirect") || "/";
+        const redirectTo = url.searchParams.get("redirect") || "/";
         const callbackUrl = `${window.location.origin}${redirectTo}`;
         await auth.loginWithProvider(providerId, callbackUrl);
     }
@@ -104,7 +109,7 @@
                     {#each providers as provider}
                         <button
                             onclick={() => handleSocialLogin(provider.id)}
-                            class="btn btn-outline w-full gap-2"
+                            class="btn w-full gap-2"
                             disabled={loading}>
                             {#if provider.id === "google"}
                                 <span class="iconify logos--google-icon size-5"></span>
