@@ -1,12 +1,12 @@
 {
-    "name": "scalo-sveltekit",
-    "description": "A Startup Template using daisyUI and TailwindCSS",
-    "homepage": "https://scalo.daisyui.com/",
+    "name": "okletsdoit",
+    "description": "Frontend for OkLetsDoIt, a wedding website template built with SvelteKit and TailwindCSS + DaisyUI.",
+    "homepage": "",
     "author": {
-        "name": "Denish Navadiya",
-        "url": "https://withden.dev"
+        "name": "Ian Day",
+        "url": ""
     },
-    "version": "3.0.0",
+    "version": "0.1.0",
     "private": true,
     "type": "module",
     "scripts": {

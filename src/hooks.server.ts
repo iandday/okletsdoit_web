@@ -1,7 +1,7 @@
-import { redirect } from '@sveltejs/kit';
-import type { Handle } from '@sveltejs/kit';
+import { redirect } from "@sveltejs/kit";
+import type { Handle } from "@sveltejs/kit";
 
-const API_URL = process.env.VITE_API_URL || 'http://localhost:8000';
+const API_URL = process.env.VITE_API_URL || "http://localhost:8000";
 
 // Routes that require authentication
 const protectedRoutes: string[] = [];
@@ -10,11 +10,11 @@ export const handle: Handle = async ({ event, resolve }) => {
     const { url, cookies } = event;
 
     // Check if this route requires authentication
-    const requiresAuth = protectedRoutes.some(route => url.pathname.startsWith(route));
+    const requiresAuth = protectedRoutes.some((route) => url.pathname.startsWith(route));
 
     if (requiresAuth) {
         // Check if user is authenticated by checking session with backend
-        const sessionCookie = cookies.get('sessionid');
+        const sessionCookie = cookies.get("sessionid");
 
         if (!sessionCookie) {
             // No session cookie, redirect to login
@@ -41,7 +41,7 @@ export const handle: Handle = async ({ event, resolve }) => {
             }
         } catch (error) {
             if (error instanceof Response) throw error;
-            console.error('Auth check failed:', error);
+            console.error("Auth check failed:", error);
             throw redirect(303, `/auth/login?redirect=${encodeURIComponent(url.pathname)}`);
         }
     }
