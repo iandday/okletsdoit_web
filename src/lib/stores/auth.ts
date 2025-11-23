@@ -261,6 +261,8 @@ function createAuthStore() {
 
         // Initiate provider redirect flow (e.g., Google, GitHub)
         async loginWithProvider(providerId: string, callbackUrl?: string) {
+            if (!browser) return { success: false, error: 'Not in browser context' };
+
             try {
                 const csrfToken = getCsrfToken();
                 const headers: Record<string, string> = {
@@ -270,28 +272,55 @@ function createAuthStore() {
                     headers['X-CSRFToken'] = csrfToken;
                 }
 
-                const body: any = { provider: providerId };
+                const body: any = { provider: providerId, process: 'login' };
                 if (callbackUrl) {
                     body.callback_url = callbackUrl;
                 }
 
-                const response = await fetch(`${API_URL}/_allauth/${CLIENT}/v1/auth/provider/redirect`, {
-                    method: 'POST',
-                    headers,
-                    credentials: 'include',
-                    body: JSON.stringify(body),
-                });
+                // POST to the redirect endpoint - it will return a 302 redirect
+                // We need to handle this by creating a form and submitting it
+                // because fetch() doesn't follow 302 redirects that change origins
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `${API_URL}/_allauth/${CLIENT}/v1/auth/provider/redirect`;
 
-                const result = await response.json();
-
-                if (response.ok && result.data?.location) {
-                    // Redirect to provider's auth page
-                    window.location.href = result.data.location;
-                    return { success: true };
-                } else {
-                    const errorMessage = result.errors?.[0]?.message || 'Provider redirect failed';
-                    return { success: false, error: errorMessage };
+                // Add CSRF token as hidden input
+                if (csrfToken) {
+                    const csrfInput = document.createElement('input');
+                    csrfInput.type = 'hidden';
+                    csrfInput.name = 'csrfmiddlewaretoken';
+                    csrfInput.value = csrfToken;
+                    form.appendChild(csrfInput);
                 }
+
+                // Add provider
+                const providerInput = document.createElement('input');
+                providerInput.type = 'hidden';
+                providerInput.name = 'provider';
+                providerInput.value = providerId;
+                form.appendChild(providerInput);
+
+                // Add process
+                const processInput = document.createElement('input');
+                processInput.type = 'hidden';
+                processInput.name = 'process';
+                processInput.value = 'login';
+                form.appendChild(processInput);
+
+                // Add callback URL if provided
+                if (callbackUrl) {
+                    const callbackInput = document.createElement('input');
+                    callbackInput.type = 'hidden';
+                    callbackInput.name = 'callback_url';
+                    callbackInput.value = callbackUrl;
+                    form.appendChild(callbackInput);
+                }
+
+                // Submit form to trigger redirect
+                document.body.appendChild(form);
+                form.submit();
+
+                return { success: true };
             } catch (error) {
                 console.error('Provider login error:', error);
                 return {

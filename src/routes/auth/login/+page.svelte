@@ -2,18 +2,26 @@
     import { goto } from "$app/navigation";
     import { auth } from "$lib/stores/auth";
     import { onMount } from "svelte";
+    import type { PageData } from "./$types";
 
-    interface Props {
-        url: URL;
+    interface Provider {
+        id: string;
+        name: string;
+        client_id?: string;
+        flows?: string[];
     }
 
-    let { url }: Props = $props();
+    interface Props {
+        data: PageData;
+    }
+
+    let { data }: Props = $props();
 
     let email = $state("");
     let password = $state("");
     let error = $state("");
     let loading = $state(false);
-    let providers = $state([]);
+    let providers = $state<Provider[]>([]);
     let loadingProviders = $state(true);
 
     onMount(async () => {
@@ -30,8 +38,7 @@
 
         if (result.success) {
             // Redirect to original page or home
-            const redirectTo = url.searchParams.get("redirect") || "/";
-            goto(redirectTo);
+            goto(data.redirect);
         } else {
             error = result.error || "Login failed. Please try again.";
         }
@@ -42,8 +49,8 @@
     async function handleSocialLogin(providerId: string) {
         loading = true;
         error = "";
-        const redirectTo = url.searchParams.get("redirect") || "/";
-        const callbackUrl = `${window.location.origin}${redirectTo}`;
+        // Redirect to our callback page with the final destination
+        const callbackUrl = `${window.location.origin}/auth/callback?redirect=${encodeURIComponent(data.redirect)}`;
         await auth.loginWithProvider(providerId, callbackUrl);
     }
 </script>
