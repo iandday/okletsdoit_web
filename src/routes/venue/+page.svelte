@@ -11,7 +11,6 @@
 <div>
     <PageShell
         title="Timberframe Lodge"
-        ,
         description="Join us at Timberframe Lodge, tucked away in the Hocking Hills region of southeastern Ohio.">
         <img
             src="/images/venue/timberframeExterior.webp"

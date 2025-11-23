@@ -17,8 +17,8 @@
         },
         spaceBetween: 20,
         navigation: {
-            prevEl: ".testimonials-button-prev",
-            nextEl: ".testimonials-button-next",
+            prevEl: ".attractions-button-prev",
+            nextEl: ".attractions-button-next",
         },
         modules: [Navigation, Pagination, Autoplay],
     };
@@ -107,11 +107,11 @@
             <div
                 class="absolute z-1 flex justify-between max-md:start-1/2 max-md:-bottom-12 max-md:-translate-x-1/2 max-md:gap-3 md:-inset-x-24 md:top-1/2 md:-translate-y-1/2">
                 <button
-                    class="border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-content hover:bg-base-200 hover:text-primary-content shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10">
+                    class=".attractions-button-prev border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-content hover:bg-base-200 hover:text-primary-content shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10">
                     <span class="iconify lucide--chevron-left size-5"></span>
                 </button>
                 <button
-                    class="border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-content hover:bg-base-200 hover:text-primary-content shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10">
+                    class=".attractions-button-next border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-content hover:bg-base-200 hover:text-primary-content shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10">
                     <span class="iconify lucide--chevron-right size-5"></span>
                 </button>
             </div>
