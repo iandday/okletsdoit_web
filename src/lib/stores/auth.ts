@@ -25,11 +25,25 @@ interface User {
     has_usable_password?: boolean;
 }
 
+interface Provider {
+    id: string;
+    name: string;
+    client_id?: string;
+    flows?: string[];
+}
+
+interface ProviderAccount {
+    uid: string;
+    display: string;
+    provider: string;
+}
+
 interface AuthResponse {
     status: number;
     data?: {
         user?: User;
         flows?: any[];
+        providers?: Provider[];
     };
     meta?: {
         is_authenticated?: boolean;
@@ -226,6 +240,169 @@ function createAuthStore() {
                 return {
                     success: false,
                     error: error instanceof Error ? error.message : 'Registration failed'
+                };
+            }
+        },
+
+        // Get available authentication providers
+        async getProviders() {
+            try {
+                const response = await fetch(`${API_URL}/_allauth/${CLIENT}/v1/config`, {
+                    credentials: 'include',
+                });
+
+                const result = await response.json();
+                return result.data?.socialaccount?.providers || [];
+            } catch (error) {
+                console.error('Failed to fetch providers:', error);
+                return [];
+            }
+        },
+
+        // Initiate provider redirect flow (e.g., Google, GitHub)
+        async loginWithProvider(providerId: string, callbackUrl?: string) {
+            try {
+                const csrfToken = getCsrfToken();
+                const headers: Record<string, string> = {
+                    'Content-Type': 'application/json',
+                };
+                if (csrfToken) {
+                    headers['X-CSRFToken'] = csrfToken;
+                }
+
+                const body: any = { provider: providerId };
+                if (callbackUrl) {
+                    body.callback_url = callbackUrl;
+                }
+
+                const response = await fetch(`${API_URL}/_allauth/${CLIENT}/v1/auth/provider/redirect`, {
+                    method: 'POST',
+                    headers,
+                    credentials: 'include',
+                    body: JSON.stringify(body),
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.data?.location) {
+                    // Redirect to provider's auth page
+                    window.location.href = result.data.location;
+                    return { success: true };
+                } else {
+                    const errorMessage = result.errors?.[0]?.message || 'Provider redirect failed';
+                    return { success: false, error: errorMessage };
+                }
+            } catch (error) {
+                console.error('Provider login error:', error);
+                return {
+                    success: false,
+                    error: error instanceof Error ? error.message : 'Provider login failed'
+                };
+            }
+        },
+
+        // Handle provider token (for mobile apps or custom OAuth flows)
+        async loginWithProviderToken(providerId: string, token: string, tokenType: string = 'access_token') {
+            try {
+                const csrfToken = getCsrfToken();
+                const headers: Record<string, string> = {
+                    'Content-Type': 'application/json',
+                };
+                if (csrfToken) {
+                    headers['X-CSRFToken'] = csrfToken;
+                }
+
+                const response = await fetch(`${API_URL}/_allauth/${CLIENT}/v1/auth/provider/token`, {
+                    method: 'POST',
+                    headers,
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        provider: providerId,
+                        token,
+                        token_type: tokenType,
+                    }),
+                });
+
+                const result: AuthResponse = await response.json();
+
+                if (!response.ok) {
+                    const errorMessage = result.errors?.[0]?.message || 'Token authentication failed';
+                    throw new Error(errorMessage);
+                }
+
+                // Check if fully authenticated
+                if (result.meta?.is_authenticated && result.data?.user) {
+                    set({ user: result.data.user, isAuthenticated: true, isLoading: false });
+                    return { success: true };
+                }
+
+                // Handle flows (e.g., additional signup info needed)
+                if (result.data?.flows && result.data.flows.length > 0) {
+                    return {
+                        success: false,
+                        error: 'Additional information required',
+                        flows: result.data.flows
+                    };
+                }
+
+                return { success: true };
+            } catch (error) {
+                console.error('Provider token error:', error);
+                return {
+                    success: false,
+                    error: error instanceof Error ? error.message : 'Token authentication failed'
+                };
+            }
+        },
+
+        // Get connected provider accounts for authenticated user
+        async getConnectedProviders(): Promise<ProviderAccount[]> {
+            try {
+                const response = await fetch(`${API_URL}/_allauth/${CLIENT}/v1/account/providers`, {
+                    credentials: 'include',
+                });
+
+                const result = await response.json();
+                return result.data || [];
+            } catch (error) {
+                console.error('Failed to fetch connected providers:', error);
+                return [];
+            }
+        },
+
+        // Disconnect a provider account
+        async disconnectProvider(providerId: string, accountUid: string) {
+            try {
+                const csrfToken = getCsrfToken();
+                const headers: Record<string, string> = {
+                    'Content-Type': 'application/json',
+                };
+                if (csrfToken) {
+                    headers['X-CSRFToken'] = csrfToken;
+                }
+
+                const response = await fetch(`${API_URL}/_allauth/${CLIENT}/v1/account/providers`, {
+                    method: 'DELETE',
+                    headers,
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        provider: providerId,
+                        account: accountUid,
+                    }),
+                });
+
+                if (response.ok) {
+                    return { success: true };
+                } else {
+                    const result = await response.json();
+                    const errorMessage = result.errors?.[0]?.message || 'Failed to disconnect provider';
+                    return { success: false, error: errorMessage };
+                }
+            } catch (error) {
+                console.error('Disconnect provider error:', error);
+                return {
+                    success: false,
+                    error: error instanceof Error ? error.message : 'Failed to disconnect provider'
                 };
             }
         },

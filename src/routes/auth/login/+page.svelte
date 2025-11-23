@@ -2,11 +2,19 @@
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
     import { auth } from "$lib/stores/auth";
+    import { onMount } from "svelte";
 
     let email = $state("");
     let password = $state("");
     let error = $state("");
     let loading = $state(false);
+    let providers = $state([]);
+    let loadingProviders = $state(true);
+
+    onMount(async () => {
+        providers = await auth.getProviders();
+        loadingProviders = false;
+    });
 
     async function handleLogin(e: Event) {
         e.preventDefault();
@@ -24,6 +32,14 @@
         }
 
         loading = false;
+    }
+
+    async function handleSocialLogin(providerId: string) {
+        loading = true;
+        error = "";
+        const redirectTo = $page.url.searchParams.get("redirect") || "/";
+        const callbackUrl = `${window.location.origin}${redirectTo}`;
+        await auth.loginWithProvider(providerId, callbackUrl);
     }
 </script>
 
@@ -79,14 +95,45 @@
                         Login
                     {/if}
                 </button>
-
-                <div class="text-center">
-                    <p class="text-sm">
-                        Don't have an account?
-                        <a href="/auth/register" class="link link-primary">Register here</a>
-                    </p>
-                </div>
             </form>
+
+            {#if !loadingProviders && providers.length > 0}
+                <div class="divider">OR</div>
+
+                <div class="space-y-2">
+                    {#each providers as provider}
+                        <button
+                            onclick={() => handleSocialLogin(provider.id)}
+                            class="btn btn-outline w-full gap-2"
+                            disabled={loading}>
+                            {#if provider.id === "google"}
+                                <span class="iconify logos--google-icon size-5"></span>
+                            {:else if provider.id === "github"}
+                                <span class="iconify logos--github-icon size-5"></span>
+                            {:else if provider.id === "facebook"}
+                                <span class="iconify logos--facebook size-5"></span>
+                            {:else if provider.id === "authentik"}
+                                <span class="iconify lucide--shield-check size-5"></span>
+                            {:else}
+                                <span class="iconify lucide--log-in size-5"></span>
+                            {/if}
+                            Continue with {provider.name}
+                        </button>
+                    {/each}
+                </div>
+            {:else if loadingProviders}
+                <div class="divider">OR</div>
+                <div class="flex justify-center py-4">
+                    <span class="loading loading-spinner loading-sm"></span>
+                </div>
+            {/if}
+
+            <div class="mt-4 text-center">
+                <p class="text-sm">
+                    Don't have an account?
+                    <a href="/auth/register" class="link link-primary">Register here</a>
+                </p>
+            </div>
         </div>
     </div>
 </div>
