@@ -1,5 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
+    import PageShell from "$lib/components/layouts/PageShell.svelte";
     import { auth } from "$lib/stores/auth";
     import { onMount } from "svelte";
     import type { PageData } from "./$types";
@@ -55,22 +56,25 @@
     }
 </script>
 
-<div class="min-h-screen flex items-center justify-center bg-base-200 px-4">
-    <div class="card w-full max-w-md bg-base-100 shadow-xl">
-        <div class="card-body">
-            <h2 class="card-title text-3xl font-bold text-center mb-6">Welcome Back</h2>
+<PageShell title="Login">
+    <div class="pb-8 lg:pb-12 xl:pb-16">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8 max-w-4xl">
+            <div class="flex justify-center items-center min-h-[400px]">
+                <div class="card w-full max-w-md bg-base-200 text-secondary-content shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title text-3xl font-bold text-center mb-6">Welcome Back</h2>
 
-            {#if error}
-                <div class="alert alert-error mb-4">
-                    <span class="iconify lucide--alert-circle size-5"></span>
-                    <span>{error}</span>
-                </div>
-            {/if}
+                        {#if error}
+                            <div class="alert alert-error mb-4">
+                                <span class="iconify lucide--alert-circle size-5"></span>
+                                <span>{error}</span>
+                            </div>
+                        {/if}
 
-            <form onsubmit={handleLogin}>
+                        <!-- <form onsubmit={handleLogin}>
                 <div class="form-control mb-4">
                     <label class="label" for="email">
-                        <span class="label-text">Email</span>
+                        <span class="label-text text-secondary-content">Email</span>
                     </label>
                     <input
                         id="email"
@@ -84,7 +88,7 @@
 
                 <div class="form-control mb-6">
                     <label class="label" for="password">
-                        <span class="label-text">Password</span>
+                        <span class="label-text text-secondary-content">Password</span>
                     </label>
                     <input
                         id="password"
@@ -95,11 +99,12 @@
                         required
                         disabled={loading} />
                     <label class="label">
-                        <a href="/auth/forgot-password" class="label-text-alt link link-hover">Forgot password?</a>
+                        <a href="/auth/forgot-password" class="label-text-alt link link-hover text-secondary-content"
+                            >Forgot password?</a>
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-full mb-4" disabled={loading}>
+                <button type="submit" class="btn btn-primary w-full mb-4 text-secondary-content" disabled={loading}>
                     {#if loading}
                         <span class="loading loading-spinner"></span>
                         Logging in...
@@ -107,45 +112,48 @@
                         Login
                     {/if}
                 </button>
-            </form>
+            </form> -->
 
-            {#if !loadingProviders && providers.length > 0}
-                <div class="divider">OR</div>
+                        {#if !loadingProviders && providers.length > 0}
+                            <!-- <div class="divider">OR</div> -->
 
-                <div class="space-y-2">
-                    {#each providers as provider}
-                        <button
-                            onclick={() => handleSocialLogin(provider.id)}
-                            class="btn w-full gap-2"
-                            disabled={loading}>
-                            {#if provider.id === "google"}
-                                <span class="iconify logos--google-icon size-5"></span>
-                            {:else if provider.id === "github"}
-                                <span class="iconify logos--github-icon size-5"></span>
-                            {:else if provider.id === "facebook"}
-                                <span class="iconify logos--facebook size-5"></span>
-                            {:else if provider.id === "authentik"}
-                                <span class="iconify lucide--shield-check size-5"></span>
-                            {:else}
-                                <span class="iconify lucide--log-in size-5"></span>
-                            {/if}
-                            Continue with {provider.name}
-                        </button>
-                    {/each}
-                </div>
-            {:else if loadingProviders}
-                <div class="divider">OR</div>
-                <div class="flex justify-center py-4">
-                    <span class="loading loading-spinner loading-sm"></span>
-                </div>
-            {/if}
+                            <div class="space-y-2">
+                                {#each providers as provider}
+                                    <button
+                                        onclick={() => handleSocialLogin(provider.id)}
+                                        class="btn btn-primary text-secondary-content w-full gap-2"
+                                        disabled={loading}>
+                                        {#if provider.id === "google"}
+                                            <span class="iconify logos--google-icon size-5"></span>
+                                        {:else if provider.id === "github"}
+                                            <span class="iconify logos--github-icon size-5"></span>
+                                        {:else if provider.id === "facebook"}
+                                            <span class="iconify logos--facebook size-5"></span>
+                                        {:else if provider.id === "authentik"}
+                                            <span class="iconify lucide--shield-check size-5"></span>
+                                        {:else}
+                                            <span class="iconify lucide--log-in size-5"></span>
+                                        {/if}
+                                        Continue with {provider.name}
+                                    </button>
+                                {/each}
+                            </div>
+                        {:else if loadingProviders}
+                            <div class="divider">OR</div>
+                            <div class="flex justify-center py-4">
+                                <span class="loading loading-spinner loading-sm"></span>
+                            </div>
+                        {/if}
 
-            <div class="mt-4 text-center">
+                        <!-- <div class="mt-4 text-center">
                 <p class="text-sm">
                     Don't have an account?
                     <a href="/auth/register" class="link link-primary">Register here</a>
                 </p>
+            </div> -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</PageShell>
