@@ -4,7 +4,7 @@
 </script>
 
 <div>
-    <PageShell image="/images/titles/logo.png">
+    <PageShell image="/images/logo.png">
         <Content />
     </PageShell>
 </div>
