@@ -24,7 +24,7 @@
     };
 
     $effect(() => {
-        new Swiper(".swiper", swiperOptions);
+        new Swiper(".attractions-swiper", swiperOptions);
     });
 
     type iAttactions = {
@@ -69,12 +69,16 @@
 <div class="mx-auto my-16 max-w-7xl px-4 sm:px-6 lg:px-8">
     <h2
         class="text-center text-2xl leading-tight font-bold sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-        Wanna See Some Attractions?
+        Explore the Area
     </h2>
+    <p class="text-base-content/70 text-xl italic max-w-2xl mx-auto">
+        If you have time to kill and want to explore the area, these are a few of our favorite places to visit in
+        Hocking Hills.
+    </p>
     <div
         class="mt-8 flex scroll-mt-36 justify-center overflow-visible transition-all delay-1500 duration-1000 md:mt-12 xl:mt-16 starting:opacity-0">
         <div class="relative max-w-[95%] md:max-w-xl lg:max-w-3xl xl:max-w-5xl">
-            <div class="swiper">
+            <div class="attractions-swiper">
                 <div class="swiper-wrapper">
                     {#each attractions as attraction}
                         <div class="swiper-slide">
@@ -104,14 +108,13 @@
                     {/each}
                 </div>
             </div>
-            <div
-                class="absolute z-1 flex justify-between max-md:start-1/2 max-md:-bottom-12 max-md:-translate-x-1/2 max-md:gap-3 md:-inset-x-24 md:top-1/2 md:-translate-y-1/2">
+            <div class="mt-8 flex items-center justify-center gap-4">
                 <button
-                    class=".attractions-button-prev border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-content hover:bg-base-200 hover:text-primary-content shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10">
+                    class="attractions-button-prev border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-content hover:bg-base-200 hover:text-primary-content shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10">
                     <span class="iconify lucide--chevron-left size-5"></span>
                 </button>
                 <button
-                    class=".attractions-button-next border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-content hover:bg-base-200 hover:text-primary-content shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10">
+                    class="attractions-button-next border-base-200 flex size-8 cursor-pointer items-center justify-center rounded-full bg-secondary text-secondary-content hover:bg-base-200 hover:text-primary-content shadow-xs transition-all hover:shadow-md max-md:shadow md:size-10">
                     <span class="iconify lucide--chevron-right size-5"></span>
                 </button>
             </div>

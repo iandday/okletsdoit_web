@@ -53,11 +53,10 @@
 <div class="mx-auto my-16 max-w-7xl px-4 sm:px-6 lg:px-8">
     <h2
         class="text-center text-2xl leading-tight font-bold sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4">
-        Explore the Venue
+        Check Out The Venue
     </h2>
     <p class="text-base-content/70 text-lg text-center mb-12 max-w-3xl mx-auto">
-        Take a visual tour of our beautiful venue through this curated gallery of images. From scenic views to cozy
-        corners, get a glimpse of what awaits you.
+        We’re really excited to celebrate with you - take a look at our venue while we wait for the big day!
     </p>
     <!-- Swiper Gallery -->
     <div class="relative">
